@@ -1,4 +1,4 @@
-package com.example.imccalculator
+package com.example.imccalculator.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.imccalculator.R
+import com.example.imccalculator.utils.calculateImc
+import com.example.imccalculator.utils.getStatus
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,9 +30,12 @@ class MainActivity : AppCompatActivity() {
             if(height.text.toString().trim().length  <= 1 || weight.text.toString().trim().length  <= 1 ) {
                 Toast.makeText(this, "Você não preencheu todos os campos corretamente!", Toast.LENGTH_LONG).show()
             } else {
-                val imc = calculateImc(height.text.toString().toDouble(), weight.text.toString().toDouble())
+                val imc = calculateImc(
+                    height.text.toString().toDouble(), weight.text.toString().toDouble()
+                )
                 result.text = imc
-                status.text = getStatus(imc.toDouble())
+                status.text =
+                    getStatus(imc.toDouble())
             }
         }
     }

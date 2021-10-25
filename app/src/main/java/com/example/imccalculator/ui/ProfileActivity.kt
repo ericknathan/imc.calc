@@ -1,12 +1,17 @@
-package com.example.imccalculator
+package com.example.imccalculator.ui
 
 import android.app.DatePickerDialog
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.*
+import com.example.imccalculator.R
+import com.example.imccalculator.model.User
+import com.example.imccalculator.utils.convertStringToLocalDate
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class ProfileActivity : AppCompatActivity() {
@@ -64,6 +69,37 @@ class ProfileActivity : AppCompatActivity() {
         when(item.itemId) {
             R.id.save_button -> {
                 if(validateInputs()) {
+                    var birthDate = convertStringToLocalDate(editBirthDate.text.toString());
+                    val user = User(
+                        1,
+                        editName.text.toString(),
+                        editEmail.text.toString(),
+                        editPassword.text.toString(),
+                        0,
+                        java.lang.Double.parseDouble(editHeight.text.toString()),
+                        LocalDate.of(
+                            birthDate.year,
+                            birthDate.month,
+                            birthDate.dayOfMonth
+                        ),
+                        editProfession.text.toString(),
+                        if(radioGenderFemale.isChecked) 'F' else 'M'
+                    )
+
+                    val data = getSharedPreferences("user", Context.MODE_PRIVATE)
+
+                    val editor = data.edit()
+                    editor.putInt("id", user.id)
+                    editor.putString("nome", user.name)
+                    editor.putString("email", user.email)
+                    editor.putString("password", user.password)
+                    editor.putInt("weight", user.weight)
+                    editor.putFloat("height", user.height.toFloat())
+                    editor.putString("birthDate", user.birthDate.toString())
+                    editor.putString("profession", user.profession)
+                    editor.putString("gender", user.gender.toString())
+                    editor.apply()
+
                     Toast.makeText(this, "Perfil salvo com sucesso!", Toast.LENGTH_SHORT).show()
                 }
             }

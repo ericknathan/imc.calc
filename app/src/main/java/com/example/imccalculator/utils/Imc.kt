@@ -1,4 +1,4 @@
-package com.example.imccalculator
+package com.example.imccalculator.utils
 
 fun calculateImc(height: Double, weight: Double): String {
     val imc = (weight / (height * height))
