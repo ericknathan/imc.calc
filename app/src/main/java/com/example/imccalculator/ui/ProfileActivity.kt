@@ -2,17 +2,24 @@ package com.example.imccalculator.ui
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.*
 import com.example.imccalculator.R
 import com.example.imccalculator.model.User
+import com.example.imccalculator.utils.convertLocalDateToString
 import com.example.imccalculator.utils.convertStringToLocalDate
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+import com.example.imccalculator.utils.decodeBase64ToBitmap
+import com.example.imccalculator.utils.encodeBitmapToBase64
 import java.util.*
+
+const val CODE_IMAGE = 100
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -24,6 +31,9 @@ class ProfileActivity : AppCompatActivity() {
     lateinit var editBirthDate : EditText
     lateinit var radioGenderMale : RadioButton
     lateinit var radioGenderFemale : RadioButton
+    lateinit var tvChangePhoto : TextView
+    lateinit var ivProfilePicture : ImageView
+    var imageBitmap : Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,10 +50,19 @@ class ProfileActivity : AppCompatActivity() {
         etBirthDate.setOnClickListener{
             val dp = DatePickerDialog(this,
             DatePickerDialog.OnDateSetListener{ _, _year, _month, _day ->
-                etBirthDate.setText("$_day/${_month + 1}/$_year")
+                var formattedDay = _day.toString()
+                var formattedMonth = (_month+1).toString()
+
+                if(_day < 10) formattedDay = "0$formattedDay"
+                if(_month < 9) formattedMonth = "0$formattedMonth"
+
+                etBirthDate.setText("$formattedDay/$formattedMonth/$_year")
             }, year, month, day)
             dp.show()
         }
+
+        val data = getSharedPreferences("user", Context.MODE_PRIVATE)
+
 
         editEmail = findViewById<EditText>(R.id.edit_email)
         editPassword = findViewById<EditText>(R.id.edit_password)
@@ -53,11 +72,48 @@ class ProfileActivity : AppCompatActivity() {
         editBirthDate = findViewById<EditText>(R.id.edit_birth_date)
         radioGenderMale = findViewById<RadioButton>(R.id.radio_male)
         radioGenderFemale = findViewById<RadioButton>(R.id.radio_female)
+        tvChangePhoto = findViewById(R.id.change_photo)
+        ivProfilePicture = findViewById(R.id.profile_image)
+
+        editEmail.setText(data.getString("email", ""))
+        editPassword.setText(data.getString("password", ""))
+        editName.setText(data.getString("name", ""))
+        editProfession.setText(data.getString("profession", ""))
+        editBirthDate.setText(convertLocalDateToString(data.getString("birthDate", "")))
+        ivProfilePicture.setImageBitmap(decodeBase64ToBitmap(data.getString("profilePicture", "")))
+        /*
+        editHeight.setText(data.getString("height", ""))
+        radioGenderMale.isChecked = true
+         */
 
         val imageView = findViewById<ImageView>(R.id.profile_image)
         imageView.clipToOutline = true
 
         supportActionBar!!.title = "Novo Usuário"
+
+        tvChangePhoto.setOnClickListener {
+            openGallery()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, image: Intent?) {
+        super.onActivityResult(requestCode, resultCode, image)
+
+        Log.i("logger", image.toString())
+
+        if(requestCode === CODE_IMAGE && resultCode == -1) {
+            val imageStream = contentResolver.openInputStream(image!!.data!!)
+
+            imageBitmap = BitmapFactory.decodeStream(imageStream)
+            ivProfilePicture.setImageBitmap(imageBitmap)
+        }
+    }
+
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "image/*"
+
+        startActivityForResult(Intent.createChooser(intent, "Selecione uma foto"), CODE_IMAGE)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -69,28 +125,27 @@ class ProfileActivity : AppCompatActivity() {
         when(item.itemId) {
             R.id.save_button -> {
                 if(validateInputs()) {
-                    var birthDate = convertStringToLocalDate(editBirthDate.text.toString());
+                    var birthDate = convertStringToLocalDate(editBirthDate.text.toString())
+                    var convertedImage = encodeBitmapToBase64(imageBitmap)
+
                     val user = User(
                         1,
                         editName.text.toString(),
                         editEmail.text.toString(),
                         editPassword.text.toString(),
                         0,
-                        java.lang.Double.parseDouble(editHeight.text.toString()),
-                        LocalDate.of(
-                            birthDate.year,
-                            birthDate.month,
-                            birthDate.dayOfMonth
-                        ),
+                        editHeight.text.toString().toDouble(),
+                        birthDate,
                         editProfession.text.toString(),
-                        if(radioGenderFemale.isChecked) 'F' else 'M'
+                        if(radioGenderFemale.isChecked) 'F' else 'M',
+                        convertedImage
                     )
 
                     val data = getSharedPreferences("user", Context.MODE_PRIVATE)
 
                     val editor = data.edit()
                     editor.putInt("id", user.id)
-                    editor.putString("nome", user.name)
+                    editor.putString("name", user.name)
                     editor.putString("email", user.email)
                     editor.putString("password", user.password)
                     editor.putInt("weight", user.weight)
@@ -98,6 +153,7 @@ class ProfileActivity : AppCompatActivity() {
                     editor.putString("birthDate", user.birthDate.toString())
                     editor.putString("profession", user.profession)
                     editor.putString("gender", user.gender.toString())
+                    editor.putString("profilePicture", user.profilePicture)
                     editor.apply()
 
                     Toast.makeText(this, "Perfil salvo com sucesso!", Toast.LENGTH_SHORT).show()
@@ -131,6 +187,8 @@ class ProfileActivity : AppCompatActivity() {
             editBirthDate.error = "O data de nascimento é obrigatório"
         } else if(!radioGenderMale.isChecked && !radioGenderFemale.isChecked) {
             radioGenderMale.error = "É necessário indicar seu sexo"
+        } else if(imageBitmap == null) {
+            tvChangePhoto.error = "É necessário fazer upload de uma imagem"
         } else {
             isValid = true
         }

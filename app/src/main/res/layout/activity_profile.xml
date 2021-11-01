@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.ProfileActivity">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -12,66 +14,66 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="24dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="24dp">
+
             <androidx.cardview.widget.CardView
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                app:cardBackgroundColor="#FF0000"
-                app:cardCornerRadius="60dp"
                 android:layout_gravity="center"
-                >
+                app:cardBackgroundColor="#FF0000"
+                app:cardCornerRadius="60dp">
+
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/profile_picture"
+                    android:id="@+id/profile_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:id="@+id/profile_image"/>
+                    android:src="@drawable/profile_picture" />
             </androidx.cardview.widget.CardView>
 
             <TextView
+                android:id="@+id/change_photo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Trocar foto"
                 android:layout_gravity="center"
-                android:textSize="24sp"
-                android:textColor="@color/colorPrimary"
                 android:fontFamily="@font/montserrat"
-                />
+                android:text="Trocar foto"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dados para autenticação"
-                android:drawableStart="@drawable/lock"
-                android:drawableTint="@color/colorPrimary"
-                android:drawablePadding="8dp"
-                android:gravity="center"
                 android:layout_marginTop="24dp"
+                android:drawableStart="@drawable/lock"
+                android:drawablePadding="8dp"
+                android:drawableTint="@color/colorPrimary"
                 android:fontFamily="@font/montserrat"
-                />
+                android:gravity="center"
+                android:text="Dados para autenticação" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_email"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="12dp">
 
                 <EditText
                     android:id="@+id/edit_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
                     android:fontFamily="@font/montserrat"
-                    android:hint="E-mail"/>
+                    android:hint="E-mail"
+                    android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_password"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="8dp"
                 app:passwordToggleEnabled="true">
 
@@ -79,116 +81,115 @@
                     android:id="@+id/edit_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLength="30"
-                    android:inputType="textPassword"
                     android:fontFamily="@font/montserrat"
-                    android:hint="Senha"/>
+                    android:hint="Senha"
+                    android:inputType="textPassword"
+                    android:maxLength="30" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dados pessoais"
-                android:drawableStart="@drawable/person"
-                android:drawableTint="@color/colorPrimary"
-                android:drawablePadding="8dp"
-                android:gravity="center"
                 android:layout_marginTop="24dp"
+                android:drawableStart="@drawable/person"
+                android:drawablePadding="8dp"
+                android:drawableTint="@color/colorPrimary"
                 android:fontFamily="@font/montserrat"
-                />
+                android:gravity="center"
+                android:text="Dados pessoais" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="12dp">
 
                 <EditText
                     android:id="@+id/edit_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
                     android:fontFamily="@font/montserrat"
-                    android:hint="Nome"/>
+                    android:hint="Nome"
+                    android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_profession"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="16dp">
 
                 <EditText
                     android:id="@+id/edit_profession"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
                     android:fontFamily="@font/montserrat"
-                    android:hint="Profissão"/>
+                    android:hint="Profissão"
+                    android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_height"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="16dp">
 
                 <EditText
                     android:id="@+id/edit_height"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
                     android:fontFamily="@font/montserrat"
-                    android:hint="Altura"/>
+                    android:hint="Altura"
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_birth_date"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="16dp">
 
                 <EditText
                     android:id="@+id/edit_birth_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="date"
                     android:focusable="false"
                     android:fontFamily="@font/montserrat"
-                    android:hint="Data de nascimento"/>
+                    android:hint="Data de nascimento"
+                    android:inputType="date" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Sexo"
-                />
+                android:text="Sexo" />
+
             <RadioGroup
                 android:id="@+id/til_gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Sexo"
                 android:fontFamily="@font/montserrat"
+                android:hint="Sexo"
                 android:orientation="horizontal">
+
                 <RadioButton
                     android:id="@+id/radio_female"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Feminino"
                     android:fontFamily="@font/montserrat"
-                    />
+                    android:text="Feminino" />
+
                 <RadioButton
                     android:id="@+id/radio_male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Masculino"
                     android:fontFamily="@font/montserrat"
-                    />
+                    android:text="Masculino" />
             </RadioGroup>
         </LinearLayout>
     </ScrollView>
