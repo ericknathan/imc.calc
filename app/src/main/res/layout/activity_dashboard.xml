@@ -16,11 +16,11 @@
         <androidx.cardview.widget.CardView
             android:layout_width="120dp"
             android:layout_height="120dp"
-            app:cardBackgroundColor="#FF0000"
             app:cardCornerRadius="60dp"
             android:layout_gravity="center"
             >
             <ImageView
+                android:id="@+id/img_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/profile_picture"
@@ -28,9 +28,10 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Susanna Hoffs"
+            android:text="Nome"
             android:layout_gravity="center"
             android:textSize="24sp"
             android:textColor="@color/white"
@@ -38,9 +39,10 @@
             />
 
         <TextView
+            android:id="@+id/tv_profession"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Baker"
+            android:text="Profissão"
             android:layout_gravity="center"
             android:textSize="16sp"
             android:textColor="@color/white"
@@ -59,9 +61,10 @@
                 android:layout_weight="1"
                 >
                 <TextView
+                    android:id="@+id/tv_imc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="25.7"
+                    android:text="0.0"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:fontFamily="@font/montserrat_bold"
@@ -83,6 +86,7 @@
                 android:layout_weight="1"
                 >
                 <TextView
+                    android:id="@+id/tv_ncd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1980"
@@ -107,9 +111,10 @@
                 android:layout_weight="1"
                 >
                 <TextView
+                    android:id="@+id/tv_age"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="59"
+                    android:text="00"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:fontFamily="@font/montserrat_bold"
@@ -131,9 +136,10 @@
                 android:layout_weight="1"
                 >
                 <TextView
+                    android:id="@+id/tv_weight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="67"
+                    android:text="00"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:fontFamily="@font/montserrat_bold"
@@ -155,9 +161,10 @@
                 android:layout_weight="1"
                 >
                 <TextView
+                    android:id="@+id/tv_height"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1.78"
+                    android:text="0.0"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:fontFamily="@font/montserrat_bold"

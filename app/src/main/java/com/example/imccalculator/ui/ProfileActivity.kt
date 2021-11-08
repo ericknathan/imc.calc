@@ -81,10 +81,9 @@ class ProfileActivity : AppCompatActivity() {
         editProfession.setText(data.getString("profession", ""))
         editBirthDate.setText(convertLocalDateToString(data.getString("birthDate", "")))
         ivProfilePicture.setImageBitmap(decodeBase64ToBitmap(data.getString("profilePicture", "")))
-        /*
-        editHeight.setText(data.getString("height", ""))
-        radioGenderMale.isChecked = true
-         */
+        editHeight.setText(data.getFloat("height", 0F).toString())
+        if(data.getString("gender", "M") == "M") radioGenderMale.isChecked = true else radioGenderFemale.isChecked = true
+
 
         val imageView = findViewById<ImageView>(R.id.profile_image)
         imageView.clipToOutline = true
