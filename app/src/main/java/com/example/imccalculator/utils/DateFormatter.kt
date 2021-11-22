@@ -1,5 +1,6 @@
 package com.example.imccalculator.utils
 
+import android.util.Log
 import java.time.LocalDate
 import java.time.Period
 import java.time.format.DateTimeFormatter
@@ -17,9 +18,10 @@ fun convertLocalDateToString(date: String?): String {
     } else ""
 }
 
-fun calculateYearsBasedOnDate(date: LocalDate): Int {
+fun calculateYearsBasedOnDate(date: String): String {
+    val convertedDate = LocalDate.parse(date)
     return Period.between(
-        date,
+        convertedDate,
         LocalDate.now()
-    ).years
+    ).years.toString()
 }

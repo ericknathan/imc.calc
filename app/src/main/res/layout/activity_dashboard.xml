@@ -190,6 +190,7 @@
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/btn_weight_now"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginBottom="12dp">
@@ -224,6 +225,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/btn_view_historic"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginBottom="12dp">
