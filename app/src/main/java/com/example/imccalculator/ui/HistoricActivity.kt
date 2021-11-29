@@ -15,8 +15,16 @@ class HistoricActivity : AppCompatActivity() {
         val sv_weight_list = findViewById<ScrollView>(R.id.sv_weight_list)
 
         val data = getSharedPreferences("user", Context.MODE_PRIVATE)
-        data.all.forEach {
-            Log.d("xpto", it.toString())
+        val weights = data.getString("weight", "")
+        val weightDates = data.getString("weight-dates", "").toString().split(";")
+        val arrayWeights = weights.toString().split(";")
+
+        println("xpto $weightDates")
+
+        if(weightDates !== null || arrayWeights.isNotEmpty()) {
+            for((index, value) in arrayWeights.withIndex()) {
+                println("xpto Data: ${weightDates?.get(index)} Peso: $value")
+            }
         }
     }
 }

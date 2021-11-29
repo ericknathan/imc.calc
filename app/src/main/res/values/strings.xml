@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">Calculadora de IMC</string>
     <string name="title_activity_profile">ProfileActivity</string>
-    <!--
-    This string is used for square devices and overridden by hello_world in
-    values-round/strings.xml for round devices.
-    -->
     <string name="hello_world">Hello Square World!</string>
+    <string-array name="levels">
+        <item>Atividade leve</item>
+        <item>Atividade moderada</item>
+        <item>Atividade intensa</item>
+    </string-array>
 </resources>

@@ -32,16 +32,16 @@ class DashboardActivity : AppCompatActivity() {
         var btnViewHistoric = findViewById<CardView>(R.id.btn_view_historic)
 
         val user = getUser(this)
-        val userWeight = user.getInt("weight-${LocalDate.now().toString()}", 0)
+        val userWeight = user.getString("weight", "").toString().split(";")
         val userHeight = user.getFloat("height", 0F)
-        val userImc = calculateImc(userHeight.toDouble(), userWeight.toDouble())
+        val userImc = calculateImc(userHeight.toDouble(), userWeight[userWeight.lastIndex].toDouble())
 
         imgProfile.setImageBitmap(decodeBase64ToBitmap(user.getString("profilePicture", "")))
         tvName.text = user.getString("name", "")
         tvProfession.text = user.getString("profession", "")
         tvImc.text = userImc
         tvAge.text = calculateYearsBasedOnDate(user.getString("birthDate", "").toString())
-        tvWeight.text = userWeight.toString()
+        tvWeight.text = userWeight.last()
         tvHeight.text = userHeight.toString()
 
         btnWeightNow.setOnClickListener {

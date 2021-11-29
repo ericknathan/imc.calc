@@ -17,6 +17,7 @@ import com.example.imccalculator.utils.convertLocalDateToString
 import com.example.imccalculator.utils.convertStringToLocalDate
 import com.example.imccalculator.utils.decodeBase64ToBitmap
 import com.example.imccalculator.utils.encodeBitmapToBase64
+import java.time.LocalDate
 import java.util.*
 
 const val CODE_IMAGE = 100
@@ -132,7 +133,7 @@ class ProfileActivity : AppCompatActivity() {
                         editName.text.toString(),
                         editEmail.text.toString(),
                         editPassword.text.toString(),
-                        0,
+                        "0",
                         editHeight.text.toString().toDouble(),
                         birthDate,
                         editProfession.text.toString(),
@@ -147,7 +148,8 @@ class ProfileActivity : AppCompatActivity() {
                     editor.putString("name", user.name)
                     editor.putString("email", user.email)
                     editor.putString("password", user.password)
-                    editor.putInt("weight", user.weight)
+                    editor.putString("weight", user.weight)
+                    editor.putString("weight-dates", LocalDate.now().toString())
                     editor.putFloat("height", user.height.toFloat())
                     editor.putString("birthDate", user.birthDate.toString())
                     editor.putString("profession", user.profession)

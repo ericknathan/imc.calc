@@ -7,7 +7,7 @@ data class User(
     var name: String,
     var email: String,
     var password: String,
-    var weight: Int,
+    var weight: String,
     var height: Double,
     var birthDate: LocalDate,
     var profession: String,

@@ -7,94 +7,142 @@
     tools:context=".ui.WeightActivity"
     android:orientation="vertical">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="24dp"
-        android:orientation="vertical"
-        android:background="@drawable/activity_background">
-
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Vamos no pesar?"
-            android:layout_gravity="center"
-            android:textSize="24sp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/montserrat_bold"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="24dp"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:src="@drawable/exercise_illustration" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:drawableStart="@drawable/calendar"
-            android:drawablePadding="8dp"
-            android:drawableTint="@color/colorPrimary"
-            android:fontFamily="@font/montserrat"
-            android:gravity="center"
-            android:text="Data de pesagem" />
-
-        <TextView
-            android:id="@+id/tv_weight_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="__/__/____"
-            android:fontFamily="@font/montserrat_bold"
-            android:textSize="32sp"
-            android:textColor="@color/colorPrimary"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:drawableStart="@drawable/person"
-            android:drawablePadding="8dp"
-            android:drawableTint="@color/colorPrimary"
-            android:fontFamily="@font/montserrat"
-            android:gravity="center"
-            android:text="Peso atual" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_email"
+        android:layout_height="wrap_content" >
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_marginTop="8dp">
-
-            <EditText
-                android:id="@+id/edit_weight"
+            android:orientation="vertical">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:hint="Insira seu peso atual"
-                android:fontFamily="@font/montserrat"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:padding="18dp"
+                android:orientation="vertical"
+                android:background="@drawable/activity_background">
 
-        <Button
-            android:id="@+id/button_save"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Salvar"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/white"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/montserrat_bold"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    app:cardCornerRadius="60dp"
+                    android:layout_gravity="center"
+                    >
+                    <ImageView
+                        android:id="@+id/img_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/profile_picture"
+                        android:scaleType="centerCrop" />
+                </androidx.cardview.widget.CardView>
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vamos no pesar?"
+                    android:layout_gravity="center"
+                    android:textSize="24sp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/montserrat_bold"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="24dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="228dp"
+                    android:src="@drawable/exercise_illustration" />
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/info"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/colorPrimary"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Mantenha seu peso sempre atualizado. Assim, você poderá acompanhar sua evolução."/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:drawableStart="@drawable/calendar"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/colorPrimary"
+                    android:fontFamily="@font/montserrat"
+                    android:gravity="center"
+                    android:text="Data de pesagem" />
+
+                <TextView
+                    android:id="@+id/tv_weight_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="DD/MM/YYYY"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:drawableStart="@drawable/level"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/colorPrimary"
+                    android:fontFamily="@font/montserrat"
+                    android:gravity="center"
+                    android:text="Nível de atividade" />
+
+                <Spinner
+                    android:id="@+id/spinner_levels"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/levels" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:drawableStart="@drawable/height"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/colorPrimary"
+                    android:fontFamily="@font/montserrat"
+                    android:gravity="center"
+                    android:text="Seu novo peso" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <EditText
+                        android:id="@+id/edit_weight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:hint="Insira seu peso atual"
+                        android:fontFamily="@font/montserrat"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/button_save"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Registrar peso"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/montserrat_bold"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
