@@ -12,11 +12,12 @@ class HistoricActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_historic)
 
-        val sv_weight_list = findViewById<ScrollView>(R.id.sv_weight_list)
+        supportActionBar!!.hide()
+        // val sv_weight_list = findViewById<ScrollView>(R.id.sv_weight_list)
 
         val data = getSharedPreferences("user", Context.MODE_PRIVATE)
         val weights = data.getString("weight", "")
-        val weightDates = data.getString("weight-dates", "").toString().split(";")
+        val weightDates = data.getString("weightDates", "").toString().split(";")
         val arrayWeights = weights.toString().split(";")
 
         println("xpto $weightDates")

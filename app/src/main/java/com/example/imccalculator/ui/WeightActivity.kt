@@ -33,8 +33,8 @@ class WeightActivity : AppCompatActivity() {
 
             val editor = data.edit()
             editor.putString("weight", "${data.getString("weight", "").toString()};${etNewWeight.text.toString().toInt()}")
-            editor.putString("weight-dates", "${data.getString("weight-dates", "").toString()};${LocalDate.now().toString()}")
-            editor.putString("weight-levels", "${data.getString("weight-levels", "").toString()};${spinnerLevel.selectedItemPosition}")
+            editor.putString("weightDates", "${data.getString("weightDates", "").toString()};${LocalDate.now()}")
+            editor.putString("weightLevels", "${data.getString("weightLevels", "").toString()};${spinnerLevel.selectedItemPosition}")
             editor.apply()
 
             val openDashboardActivity = Intent(this, DashboardActivity::class.java)

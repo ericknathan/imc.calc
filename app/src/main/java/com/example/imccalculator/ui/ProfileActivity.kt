@@ -149,7 +149,7 @@ class ProfileActivity : AppCompatActivity() {
                     editor.putString("email", user.email)
                     editor.putString("password", user.password)
                     editor.putString("weight", user.weight)
-                    editor.putString("weight-dates", LocalDate.now().toString())
+                    editor.putString("weightDates", LocalDate.now().toString())
                     editor.putFloat("height", user.height.toFloat())
                     editor.putString("birthDate", user.birthDate.toString())
                     editor.putString("profession", user.profession)

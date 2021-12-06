@@ -2,11 +2,13 @@ package com.example.imccalculator.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.example.imccalculator.R
+import com.example.imccalculator.repository.WeighingRepository
 import com.example.imccalculator.utils.calculateImc
 import com.example.imccalculator.utils.calculateYearsBasedOnDate
 import com.example.imccalculator.utils.decodeBase64ToBitmap
@@ -32,9 +34,9 @@ class DashboardActivity : AppCompatActivity() {
         var btnViewHistoric = findViewById<CardView>(R.id.btn_view_historic)
 
         val user = getUser(this)
-        val userWeight = user.getString("weight", "").toString().split(";")
+        val userWeight = user.getString("weight", "").toString().split(";").toTypedArray()
         val userHeight = user.getFloat("height", 0F)
-        val userImc = calculateImc(userHeight.toDouble(), userWeight[userWeight.lastIndex].toDouble())
+        val userImc = calculateImc(userHeight.toDouble(), userWeight.last().toDouble())
 
         imgProfile.setImageBitmap(decodeBase64ToBitmap(user.getString("profilePicture", "")))
         tvName.text = user.getString("name", "")
@@ -50,6 +52,12 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         btnViewHistoric.setOnClickListener {
+            val weighingRepository = WeighingRepository(this)
+            val weighingList = weighingRepository.getWeighingList()
+
+            for(w in weighingList) {
+                Log.i("xpto", "${w.weighingDate} - ${w.weight}")
+            }
             val openHistoricActivity = Intent(this, HistoricActivity::class.java)
             startActivity(openHistoricActivity)
         }
